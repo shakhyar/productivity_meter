@@ -1,0 +1,47 @@
+/* index.html */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productivity Data</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <div class="container mx-auto py-8">
+        <h1 class="text-4xl font-bold mb-6 text-center">Productivity Records</h1>
+        <div class="flex justify-end mt-4">
+            <img src="/plot" alt="Productivity Graph" class="w-full max-w-4xl mx-auto mt-6">
+        </div>
+        <div class="flex justify-end mb-4">
+            <a href="/add" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add New Entry</a>
+        </div>
+        <table class="min-w-full bg-gray-800 text-left border-collapse">
+            <thead>
+                <tr>
+                    <th class="py-2 px-4 border-b border-gray-700">Date and Time</th>
+                    <th class="py-2 px-4 border-b border-gray-700">Distracted Minutes</th>
+                    <th class="py-2 px-4 border-b border-gray-700">Studied Minutes</th>
+                    <th class="py-2 px-4 border-b border-gray-700">Productivity</th>
+                    <th class="py-2 px-4 border-b border-gray-700">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data|reverse %}
+                <tr class="hover:bg-gray-700">
+                    <td class="py-2 px-4 border-b border-gray-700">{{ row[1] }}</td>
+                    <td class="py-2 px-4 border-b border-gray-700">{{ row[2] }}</td>
+                    <td class="py-2 px-4 border-b border-gray-700">{{ row[3] }}</td>
+                    <td class="py-2 px-4 border-b border-gray-700">{{ row[4] }}</td>
+                    <td class="py-2 px-4 border-b border-gray-700">
+                        <a href="/edit/{{ row[0] }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded mr-2">Edit</a>
+                        <a href="/delete/{{ row[0] }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+    </div>
+</body>
+</html>
